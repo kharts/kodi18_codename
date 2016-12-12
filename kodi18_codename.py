@@ -31,7 +31,8 @@ import pandas as pd
 def main():
     # type: () -> None
 
-    session = login()
+    # session = login()
+    session = requests.session()
     words = {}
     i = 1
     while True:
