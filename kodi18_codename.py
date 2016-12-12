@@ -18,7 +18,6 @@ License: GPL 2
 
 BASE_URL = "http://forum.kodi.tv/showthread.php?tid=282241&page="
 LOGIN_URL = "http://forum.kodi.tv/member.php"
-LAST_PAGE = 45
 TOP_RESULTS_NUMBER = 10
 SKIP_WORDS = ["L"]
 
@@ -34,10 +33,13 @@ def main():
 
     session = login()
     words = {}
-    for i in range(1, LAST_PAGE+1):
-        print "Processing page number {} from {}".format(i, LAST_PAGE)
+    i = 1
+    while True:
+        print "Processing page number {}".format(i)
         url = "{}{}".format(BASE_URL, i)
-        process_page(url, words, session)
+        if not process_page(url, words, session):
+            break
+        i += 1
 
     df = pd.DataFrame({
         "name": words.keys(),
@@ -72,11 +74,15 @@ def login():
 
 
 def process_page(page, words, session):
-    # type: (str, words, requests.session)
+    # type: (str, words, requests.session) -> bool
 
     response = session.get(page)
     # print "code", response.status_code
     bs = BeautifulSoup(response.text, "html.parser", from_encoding="utf-8")
+    if bs.find("a", attrs={"class": "pagination_next"}):
+        result = True
+    else:
+        result = False
     divs = bs.find_all("div", attrs={"class": "post-body"})
     for div in divs:
         text = div.text.encode("utf-8")
@@ -89,6 +95,7 @@ def process_page(page, words, session):
                     words[token] += 1
                 else:
                     words[token] = 1
+    return result
 
 
 if __name__ == '__main__':
