@@ -74,10 +74,9 @@ def login():
 
 
 def process_page(page, words, session):
-    # type: (str, words, requests.session) -> bool
+    # type: (str, dict, requests.session) -> bool
 
     response = session.get(page)
-    # print "code", response.status_code
     bs = BeautifulSoup(response.text, "html.parser", from_encoding="utf-8")
     if bs.find("a", attrs={"class": "pagination_next"}):
         result = True
