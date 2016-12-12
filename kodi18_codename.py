@@ -50,9 +50,9 @@ def main():
 
 
 def login():
-    # type: () -> CookieJar
+    # type: () -> requests.session
     """
-    Perform login and return cookie
+    Perform login and return session
     """
 
     username = raw_input("Enter your forum username:")
