@@ -2,7 +2,7 @@
 kodi18_codename.py - script for counting votes for new Kodi version codename
 
 Parses pages of this forum thread:
-http://forum.kodi.tv/showthread.php?tid=282241&
+http://forum.kodi.tv/showthread.php?tid=282241
 and counts mentions for each suggestion.
 
 Dependencies:
