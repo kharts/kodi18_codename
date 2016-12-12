@@ -1,3 +1,21 @@
+"""
+kodi18_codename.py - script for counting votes for new Kodi version codename
+
+Parses pages of this forum thread:
+http://forum.kodi.tv/showthread.php?tid=282241&
+and counts mentions for each suggestion.
+
+Dependencies:
+- BeautifulSoup;
+- requests;
+- pandas
+
+Author: kharts
+https://github.com/kharts/kodi18_codename
+
+License: GPL 2
+"""
+
 BASE_URL = "http://forum.kodi.tv/showthread.php?tid=282241&page="
 LOGIN_URL = "http://forum.kodi.tv/member.php"
 LAST_PAGE = 45
