@@ -87,7 +87,8 @@ def process_page(page, words, session):
     for div in divs:
         text = div.text.encode("utf-8")
         tokens = text.split()
-        for token in tokens:
+        # select only unique words
+        for token in set(tokens):
             if token.startswith("L"):
                 if token in SKIP_WORDS:
                     continue
